@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'funcoes.rb'
+
 p 'Digite a sequencia de bits que representa a mensagem'
 mensagem_original = gets.chomp
 mensagem = mensagem_original.split('')
@@ -29,3 +31,6 @@ loop do
   gerador = gerador_original.split('')
   caracteres_irregulares_gerador = gerador.select { |caractere| caractere != '1' && caractere != '0'}
 end
+
+mensagem_com_zeros_acrescentado = acrescentar_bits_zero(mensagem, gerador)
+p mensagem_com_zeros_acrescentado
