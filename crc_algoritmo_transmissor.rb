@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'funcoes.rb'
+require_relative 'funcoes_transmissor.rb'
 
 p 'Digite a sequencia de bits que representa a mensagem'
 mensagem_original = gets.chomp
@@ -20,6 +20,7 @@ loop do
   p 'Digite a sequencia de bits que representa a mensagem'
   mensagem_original = gets.chomp
   mensagem = mensagem_original.split('')
+  mensagem_original_lista = mensagem.map(&:clone)
   caracteres_irregulares_mensagem = mensagem.select { |caractere| caractere != '1' && caractere != '0'}
 end
 
