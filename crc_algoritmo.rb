@@ -34,3 +34,6 @@ end
 
 mensagem_com_zeros_acrescentado = acrescentar_bits_zero(mensagem, gerador)
 p mensagem_com_zeros_acrescentado
+
+resto = mensagem_criptografada(mensagem_com_zeros_acrescentado, gerador)
+p resto

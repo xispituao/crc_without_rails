@@ -6,52 +6,79 @@ def acrescentar_bits_zero(mensagem, gerador)
   mensagem + ['0'] * r
 end
 
-def  mensagem_criptografada(mensagem_com_zeros_acrescentado, gerador)
+def mensagem_criptografada(mensagem_com_zeros_acrescentado, gerador)
   mensagem_aux = mensagem_com_zeros_acrescentado.map(&:clone)
   mensagem_dividendo = []
-  quociente = []
   resto = []
 
-  mensagem_com_zeros_acrescentado.each do |m|
-    break if m == '1'
+  mensagem_com_zeros_acrescentado.each do |bit|
+    break if bit == '1'
 
     mensagem_aux.delete_at(0)
   end
 
-  (0...gerador.length).each do |index|
+  gerador.length.times do
     mensagem_dividendo.append(mensagem_aux[0])
     mensagem_aux.delete_at(0)
   end
 
   loop do
-    mensagem_dividendo_aux = []
     mensagem_dividendo.each_with_index do |bit, index|
-      if bit == gerador[index]
-        mensagem_dividendo_aux.append('0')
-      else
-        mensagem_dividendo_aux.append('1')
-      end
+      mensagem_dividendo[index] = if bit == gerador[index]
+                                    '0'
+                                  else
+                                    '1'
+                                  end
     end
 
-    mensagem_dividendo_aux_aux = mensagem_dividendo_aux.map(&:clone)
-    mensagem_dividendo_aux.each do |bit|
+    mensagem_dividendo_aux = mensagem_dividendo.map(&:clone)
+    mensagem_dividendo.each do |bit|
       break if bit == '1'
 
-      mensagem_dividendo_aux_aux.delete_at(0)
+      mensagem_dividendo_aux.delete_at(0)
     end
 
     loop do
-      break if mensagem_dividendo_aux_aux.length == gerador.length || mensagem_aux.length.zero?
+      break if mensagem_dividendo_aux.length == gerador.length || mensagem_aux.length.zero?
 
-      mensagem_dividendo_aux_aux.append(mensagem_aux[0])
+      mensagem_dividendo_aux.append(mensagem_aux[0])
       mensagem_aux.delete_at(0)
     end
 
-    mensagem_dividendo = mensagem_dividendo_aux_aux.map(&:clone)
+    mensagem_dividendo = mensagem_dividendo_aux.map(&:clone)
 
     if mensagem_aux.length.zero?
-      resto = mensagem_dividendo_aux_aux.map(&:clone)
+      if mensagem_dividendo.length == gerador.length
+        mensagem_dividendo.each_with_index do |bit, index|
+          mensagem_dividendo[index] = if bit == gerador[index]
+                                        '0'
+                                      else
+                                        '1'
+                                      end
+        end
+      end
+
+      if mensagem_dividendo.length >= gerador.length
+        ((mensagem_dividendo.length - gerador.length) + 1).times do |bit|
+          p "aaaa"
+          p mensagem_dividendo
+          mensagem_dividendo.delete_at(0)
+        end
+      else
+        unless gerador.length - mensagem_dividendo.length == 1
+          loop do
+            p "bbbb"
+            p mensagem_dividendo
+            mensagem_dividendo.insert(0, 0)
+
+            break if mensagem_dividendo.length == gerador.length - 1
+          end
+        end
+      end
+      resto = mensagem_dividendo.map(&:clone)
       break
     end
   end
+
+  resto
 end
