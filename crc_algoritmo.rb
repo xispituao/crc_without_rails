@@ -5,6 +5,7 @@ require_relative 'funcoes.rb'
 p 'Digite a sequencia de bits que representa a mensagem'
 mensagem_original = gets.chomp
 mensagem = mensagem_original.split('')
+mensagem_original_lista = mensagem.map(&:clone)
 p 'Digite a sequencia de bits que representa o gerador'
 gerador_original = gets.chomp
 gerador = gerador_original.split('')
@@ -33,7 +34,10 @@ loop do
 end
 
 mensagem_com_zeros_acrescentado = acrescentar_bits_zero(mensagem, gerador)
-p mensagem_com_zeros_acrescentado
 
 resto = mensagem_criptografada(mensagem_com_zeros_acrescentado, gerador)
-p resto
+
+p "Mensagem original: #{mensagem_original}"
+p "Mesagem com zeros acrescentados: #{mensagem_com_zeros_acrescentado.join('')}"
+p "FCS: #{resto.join('')}"
+p "Mensagem criptografada: #{(mensagem_original_lista + resto).join('')}"

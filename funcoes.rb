@@ -59,16 +59,12 @@ def mensagem_criptografada(mensagem_com_zeros_acrescentado, gerador)
       end
 
       if mensagem_dividendo.length >= gerador.length
-        ((mensagem_dividendo.length - gerador.length) + 1).times do |bit|
-          p "aaaa"
-          p mensagem_dividendo
+        ((mensagem_dividendo.length - gerador.length) + 1).times do
           mensagem_dividendo.delete_at(0)
         end
       else
         unless gerador.length - mensagem_dividendo.length == 1
           loop do
-            p "bbbb"
-            p mensagem_dividendo
             mensagem_dividendo.insert(0, 0)
 
             break if mensagem_dividendo.length == gerador.length - 1
