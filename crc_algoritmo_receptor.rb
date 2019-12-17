@@ -36,4 +36,9 @@ conclusao = if resto.include?('1')
             else
               'Mensagem sem erros!'
             end
+
+p "Resto: #{resto.join('')}"
+p "Mensagem com FCS: #{mensagem_original}"
+p "Mesagem original: #{mensagem_original[0, mensagem_original.length - (gerador_original.length - 1)]}"
+p "FCS: #{mensagem_original[mensagem_original.length - (gerador_original.length - 1), mensagem_original.length]}"
 p conclusao
