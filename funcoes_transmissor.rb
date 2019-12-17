@@ -48,7 +48,7 @@ def mensagem_criptografada(mensagem_com_zeros_acrescentado, gerador)
     mensagem_dividendo = mensagem_dividendo_aux.map(&:clone)
 
     if mensagem_aux.length.zero?
-      if mensagem_dividendo.length == gerador.length
+      if mensagem_dividendo.length == gerador.length && mensagem_dividendo.first == '1'
         mensagem_dividendo.each_with_index do |bit, index|
           mensagem_dividendo[index] = if bit == gerador[index]
                                         '0'

@@ -3,7 +3,6 @@ require_relative 'funcoes_receptor.rb'
 p 'Digite a sequencia de bits que representa a mensagem'
 mensagem_original = gets.chomp
 mensagem = mensagem_original.split('')
-mensagem_original_lista = mensagem.map(&:clone)
 p 'Digite a sequencia de bits que representa o gerador'
 gerador_original = gets.chomp
 gerador = gerador_original.split('')
@@ -30,3 +29,11 @@ loop do
   gerador = gerador_original.split('')
   caracteres_irregulares_gerador = gerador.select { |caractere| caractere != '1' && caractere != '0'}
 end
+
+resto = verificar_erro(mensagem, gerador)
+conclusao = if resto.include?('1')
+              'Mensagem possui erros!'
+            else
+              'Mensagem sem erros!'
+            end
+p conclusao
